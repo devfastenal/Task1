@@ -20,15 +20,14 @@ namespace Task1.Controllers
     public class BranchesController : ControllerBase
     {
         private readonly IBranchRepository _branchRepository;
-        private readonly HttpClient _client;
+        private readonly ICityRepository _cityRepository;
         private readonly IMapper _mapper;
 
-        public BranchesController(IMapper mapper, IBranchRepository branchRepository)
+        public BranchesController(IMapper mapper, IBranchRepository branchRepository, ICityRepository cityRepository)
         {
             _branchRepository = branchRepository;
             _mapper = mapper;
-            _client = new HttpClient();
-            _client.BaseAddress = new Uri("http://api.weatherapi.com/v1/current.json");
+            _cityRepository = cityRepository;
         }
 
         // GET: api/Branches
@@ -53,30 +52,6 @@ namespace Task1.Controllers
             }
 
             return branch;
-        }
-        [HttpGet("{id}/weather")]
-        public async Task<IActionResult> GetForecast(int id)
-        {
-            try
-            {
-                var branch = await _branchRepository.GetDetails(id);
-                var city = branch.City;
-                HttpResponseMessage response = await _client.GetAsync($"?key=e08165481634422b8df72421242702&q={city.CityName}");
-
-                if (response.IsSuccessStatusCode)
-                {
-                    var result = await response.Content.ReadAsStringAsync();
-                    return Ok(result);
-                }
-                else
-                {
-                    return BadRequest("Failed to get data");
-                }
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, $"Internal Server Error: {ex.Message}");
-            }
         }
         // PUT: api/Branches/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
@@ -121,6 +96,11 @@ namespace Task1.Controllers
         [Authorize]
         public async Task<ActionResult<Branch>> PostBranch(CreateBranchDto branchdto)
         {
+            var isCity = await _cityRepository.Exists(branchdto.CityId);
+            if (!isCity)
+            {
+                return BadRequest("CityId does not exist");
+            }
             var branch = _mapper.Map<Branch>(branchdto);
             await _branchRepository.AddAsync(branch);
 

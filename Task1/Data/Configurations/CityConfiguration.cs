@@ -23,6 +23,22 @@ namespace Task1.Data.Configurations
                         State = "Alberta",
                         Country = "Canada",
                         Currency = "CAD",
+                    },
+                    new City
+                    {
+                        CityId = 3,
+                        CityName = "AIRDRIE",
+                        State = "Alberta",
+                        Country = "Canada",
+                        Currency = "CAD",
+                    },
+                    new City
+                    {
+                        CityId = 4,
+                        CityName = "CALGARY",
+                        State = "Alberta",
+                        Country = "Canada",
+                        Currency = "CAD",
                     }
                 );
         }

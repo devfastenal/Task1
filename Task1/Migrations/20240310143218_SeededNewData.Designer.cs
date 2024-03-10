@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Task1.Data;
 
@@ -11,9 +12,11 @@ using Task1.Data;
 namespace Task1.Migrations
 {
     [DbContext(typeof(CustomerDataDbContext))]
-    partial class CustomerDataDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240310143218_SeededNewData")]
+    partial class SeededNewData
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -51,13 +54,13 @@ namespace Task1.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "ec4fc128-690a-4fe8-a80f-987df0d2e112",
+                            Id = "97e5179a-5acf-477f-8373-33181ad74f95",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
                         },
                         new
                         {
-                            Id = "61c8f4af-5b71-4551-8915-2a45bcd900e6",
+                            Id = "1245b133-cf5a-4a9d-9d08-8788d72c632c",
                             Name = "User",
                             NormalizedName = "USER"
                         });
@@ -320,32 +323,6 @@ namespace Task1.Migrations
                             Opened_dt = new DateOnly(2008, 1, 10),
                             Phone = "(403)948-1347",
                             Status = "Open"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Address = "BAY P - 2020 32nd Avenue NE",
-                            BU_Codes = "ABCA1",
-                            Business_Hours = "Monday - Friday 7:30am - 5:00pm",
-                            CityId = 4,
-                            Latitude = 51.0,
-                            Longitude = -114.0,
-                            Opened_dt = new DateOnly(2008, 10, 9),
-                            Phone = "(403)291-3282",
-                            Status = "Open"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            Address = "Bay # 10, 711 48 th Ave. S.E.",
-                            BU_Codes = "ABCA2",
-                            Business_Hours = "Monday - Friday 7:30am - 5:00pm",
-                            CityId = 4,
-                            Latitude = 51.0,
-                            Longitude = -114.0,
-                            Opened_dt = new DateOnly(2008, 10, 23),
-                            Phone = "(403)-258-2658",
-                            Status = "Open"
                         });
                 });
 
@@ -394,14 +371,6 @@ namespace Task1.Migrations
                         {
                             CityId = 3,
                             CityName = "AIRDRIE",
-                            Country = "Canada",
-                            Currency = "CAD",
-                            State = "Alberta"
-                        },
-                        new
-                        {
-                            CityId = 4,
-                            CityName = "CALGARY",
                             Country = "Canada",
                             Currency = "CAD",
                             State = "Alberta"

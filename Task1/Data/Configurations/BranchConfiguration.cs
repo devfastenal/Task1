@@ -33,6 +33,45 @@ namespace Task1.Data.Configurations
                         Business_Hours = "Monday - Friday 7:30am - 5:00pm",
                         Latitude = 54,
                         Longitude = -114,
+                    },
+                    new Branch
+                    {
+                        Id = 3,
+                        BU_Codes = "ABAIR",
+                        Status = "Open",
+                        Opened_dt = new DateOnly(2008, 01, 10),
+                        Address = "118 Eastlake Blvd NE Suite 101",
+                        CityId = 3,
+                        Phone = "(403)948-1347",
+                        Business_Hours = "7:30 to 5:00 moday to friday",
+                        Latitude = 51,
+                        Longitude = -114,
+                    },
+                    new Branch
+                    {
+                        Id = 4,
+                        BU_Codes = "ABCA1",
+                        Status = "Open",
+                        Opened_dt = new DateOnly(2008, 10, 09),
+                        Address = "BAY P - 2020 32nd Avenue NE",
+                        CityId = 4,
+                        Phone = "(403)291-3282",
+                        Business_Hours = "Monday - Friday 7:30am - 5:00pm",
+                        Latitude = 51,
+                        Longitude = -114,
+                    },
+                    new Branch
+                    {
+                        Id = 5,
+                        BU_Codes = "ABCA2",
+                        Status = "Open",
+                        Opened_dt = new DateOnly(2008, 10, 23),
+                        Address = "Bay # 10, 711 48 th Ave. S.E.",
+                        CityId = 4,
+                        Phone = "(403)-258-2658",
+                        Business_Hours = "Monday - Friday 7:30am - 5:00pm",
+                        Latitude = 51,
+                        Longitude = -114,
                     }
                 );
         }
