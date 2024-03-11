@@ -54,7 +54,7 @@ namespace Task1.Controllers
             return branch;
         }
         [HttpGet("BU_Codes/{code}")]
-        public async Task<ActionResult<Branch>> GetBranch(string code)
+        public async Task<ActionResult<Branch>> GetBranchByCode(string code)
         {
             var branch = await _branchRepository.GetByBuCode(code);
 
