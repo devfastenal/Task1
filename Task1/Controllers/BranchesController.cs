@@ -53,6 +53,18 @@ namespace Task1.Controllers
 
             return branch;
         }
+        [HttpGet("BU_Codes/{code}")]
+        public async Task<ActionResult<Branch>> GetBranch(string code)
+        {
+            var branch = await _branchRepository.GetByBuCode(code);
+
+            if (branch == null)
+            {
+                return NotFound();
+            }
+
+            return branch;
+        }
         // PUT: api/Branches/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]

@@ -16,5 +16,10 @@ namespace Task1.Repository
         {
             return await _context.Branches.Include(q => q.City).FirstOrDefaultAsync(q => q.Id == id);
         }
+
+        public async Task<Branch> GetByBuCode(string code)
+        {
+            return await _context.Branches.Include(q => q.City).FirstOrDefaultAsync(q => q.BU_Codes == code);
+        }
     }
 }
