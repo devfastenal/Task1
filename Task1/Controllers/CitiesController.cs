@@ -58,6 +58,10 @@ namespace Task1.Controllers
             try
             {
                 var city = await _cityRepository.GetAsync(id);
+                if(city == null)
+                {
+                    return NotFound("CityId does not exist");
+                }
                 HttpResponseMessage response = await _client.GetAsync($"?key=e08165481634422b8df72421242702&q={city.CityName}");
 
                 if (response.IsSuccessStatusCode)
