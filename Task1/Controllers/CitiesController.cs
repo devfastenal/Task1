@@ -24,6 +24,7 @@ namespace Task1.Controllers
         public CitiesController(IMapper mapper, ICityRepository cityRepository)
         {
             _cityRepository = cityRepository;
+
             _mapper = mapper;
             _client = new HttpClient();
             _client.BaseAddress = new Uri("http://api.weatherapi.com/v1/current.json");
@@ -49,7 +50,7 @@ namespace Task1.Controllers
                 return NotFound();
             }
             var cityDetails = _mapper.Map<GetCityDto>(city);
-            return cityDetails;
+            return Ok(cityDetails);
         }
 
         [HttpGet("{id}/weather")]
