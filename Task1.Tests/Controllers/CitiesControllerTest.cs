@@ -266,16 +266,19 @@ namespace Task1.Tests.Controllers
             };
             _cityRepository.Setup(q => q.GetAsync(1)).Returns(Task.FromResult(city));
             _cityRepository.Setup(q => q.GetAsync(2)).Returns(Task.FromResult(city2));
+            _cityRepository.Setup(q => q.GetAsync(4)).Throws(new Exception());
 
             //Act
             var result = await _citiesController.GetForecast(1);
-            var result2 = await _citiesController.GetForecast(3);
-            var result3 = await _citiesController.GetForecast(2);
+            var result2 = await _citiesController.GetForecast(2);
+            var result3 = await _citiesController.GetForecast(3);
+            var result4 = await _citiesController.GetForecast(4);
 
             //Assert
             result.Should().BeOfType<OkObjectResult>();
-            result2.Should().BeOfType<NotFoundObjectResult>();
-            result3.Should().BeOfType<BadRequestObjectResult>();
+            result2.Should().BeOfType<BadRequestObjectResult>();
+            result3.Should().BeOfType<NotFoundObjectResult>();
+            result4.Should().BeOfType<ObjectResult>();
         }
     }
 }
