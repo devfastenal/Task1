@@ -224,6 +224,14 @@ namespace Task1.Tests.Controllers
                 Country = "Test",
                 Currency = "Test",
             };
+            var updateCity2 = new UpdateCityDto
+            {
+                CityId = 2,
+                CityName = "Test",
+                State = "Test",
+                Country = "Test",
+                Currency = "Test",
+            };
             var city = new City
             {
                 CityId = 1,
@@ -232,16 +240,19 @@ namespace Task1.Tests.Controllers
                 Country = "Test",
                 Currency = "Test",
             };
-            _cityRepository.Setup(q => q.GetAsync(1)).Returns(Task.FromResult(city));
+            _cityRepository.Setup(q => q.GetAsync(It.IsAny<int>())).Returns(Task.FromResult(city));
             _cityRepository.Setup(q => q.UpdateAsync(It.IsAny<City>())).Throws(new DbUpdateConcurrencyException());
             _cityRepository.Setup(q => q.Exists(1)).Returns(Task.FromResult(false));
+            _cityRepository.Setup(q => q.Exists(2)).Returns(Task.FromResult(true));
             _mapper.Setup(m => m.Map(It.Is<UpdateCityDto>(x => x == updateCity), It.Is<City>(x => x == city))).Returns(city);
 
             //Act
             var result = await _citiesController.PutCity(1, updateCity);
+            Func<Task> result2 = async() => await _citiesController.PutCity(2, updateCity2);
 
             //Assert
             result.Should().BeOfType<NotFoundResult>();
+            await result2.Should().ThrowAsync<DbUpdateConcurrencyException>();
         }
 
         [Fact]
