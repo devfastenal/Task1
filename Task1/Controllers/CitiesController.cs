@@ -68,8 +68,8 @@ namespace Task1.Controllers
                 if (response.IsSuccessStatusCode)
                 {
                     var result = await response.Content.ReadAsStringAsync();
-                    var s = Newtonsoft.Json.JsonConvert.DeserializeObject(result);
-                    return Ok(s);
+                    var resultJson = Newtonsoft.Json.JsonConvert.DeserializeObject(result);
+                    return Ok(resultJson);
                 }
                 else
                 {
